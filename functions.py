@@ -62,6 +62,7 @@ def query_dataset(dataset_df, idx_participants):
                  axis=0).astype(np.float64)
     return X, Y
 
+################################ Not in use ################################
 def get_data_labels(dataset):
     X_list = []
     Y_list = []
@@ -78,7 +79,7 @@ def get_data_labels(dataset):
     X = np.stack(X_list, axis=0)
     Y = np.stack(Y_list, axis=0)
     return X, Y
-
+############################################################################
 
 
 # Classifier function 
