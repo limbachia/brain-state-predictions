@@ -2,6 +2,6 @@ __pycache__
 .ipynb_checkpoints/
 00-GridSearch.ipynb
 tensorflow/
-data/*.txt
-data/*.pkl
-data/masks
+data/
+dist
+src.egg-info/
