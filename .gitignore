@@ -137,6 +137,8 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+src/data/.ipynb_checkpoints/
+src/data/__pycache__/
 
 00-GridSearch.ipynb
 tensorflow/
