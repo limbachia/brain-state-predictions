@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 def plot_performance(history):
     # summarize history for accuracy
@@ -19,5 +20,4 @@ def plot_performance(history):
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
     plt.show()
-    
     
