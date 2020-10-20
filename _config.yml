@@ -12,6 +12,10 @@ latex:
     targetname: book.tex
 
 ###########################################################################
+# To render images 
+parse:
+  myst_extended_syntax: true
+###########################################################################
 # HTML-specific settings
 html:
   home_page_in_navbar: false
