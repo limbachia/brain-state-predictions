@@ -1,0 +1,33 @@
+# Book settings
+title: "Prediction of Brain States During Approaching and Retreating Threats: An fMRI Study"
+author: Chirag Limbachia
+copyright: "2020"
+logo: "logo.png"
+
+execute:
+  exclude_patterns:
+    - "tensorflow/*"
+    - "0*"
+    - "99*"
+    - "notebooks/*"
+
+latex:
+  latex_documents:
+    targetname: book.tex
+
+###########################################################################
+# HTML-specific settings
+html:
+  home_page_in_navbar: false
+  use_repository_button: true
+  use_issues_button: true
+  use_edit_page_button: true
+
+##########################################################################
+# Launch button settings
+repository:
+  url: https://github.com/limbachia/brain-state-predictions
+latex:
+  latex_engine: "xelatex"
+  latex_documents:
+    targetname: book.tex
