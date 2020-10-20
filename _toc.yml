@@ -1,6 +1,6 @@
 file: landing-page
 numbered: true
 
--part: Brain State Prediction
-    sections:
-    - file: training_data_description
+- part: Brain State Prediction
+  sections:
+  - file: training_data_description
