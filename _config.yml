@@ -3,16 +3,10 @@ title: "Prediction of Brain States During Approaching and Retreating Threats: An
 author: Chirag Limbachia
 copyright: "2020"
 logo: "logo.png"
+exclude_patterns            : ["tensorflow/*", "0*","99*","notebooks/*"]
 
 execute:
-  exclude_patterns:
-    - "tensorflow/lib/python3.6/site-packages/jupyter_book/book_template/notebooks"
-    - "tensorflow/lib/python3.6/site-packages/matplotlib/backends/web_backend/nbagg_uat"
-    - "tensorflow/lib/python3.6/site-packages/nbclient/tests/files/Autokill"
-    - "0*"
-    - "99*"
-    - "notebooks/*"
-
+  exclude_patterns: ["tensorflow/lib/python3.6/site-packages/jupyter_book/book_template/notebooks","tensorflow/lib/python3.6/site-packages/matplotlib/backends/web_backend/nbagg_uat","tensorflow/lib/python3.6/site-packages/nbclient/tests/files/Autokill","0*","99*","notebooks/*"]
 latex:
   latex_documents:
     targetname: book.tex
