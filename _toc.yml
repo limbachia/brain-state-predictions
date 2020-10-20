@@ -1,5 +1,5 @@
-file: landing-page
-numbered: true
+- file: landing-page
+  numbered: true
 
 - part: Brain State Prediction
   sections:
