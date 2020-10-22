@@ -15,4 +15,4 @@ Functional magnetic resonance imaging (fMRI) data, RNN implementation to predict
 - Rate at which fMRI data is collected is commonly referred to as repetition time (TR).
 - Commonly used TR is 0.5-2 seconds per volume. TR = 1.25 seconds for the current study.
 
-<img src="./support/images/fmridata.png" alt="fMRI data" width="500"/>
+<img src="./support/images/fmri-setup.png" alt="fMRI data" width="500"/>
