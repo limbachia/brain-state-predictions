@@ -18,7 +18,6 @@ Functional magnetic resonance imaging (fMRI) data, RNN implementation to predict
 <img src="./support/images/fmri-setup.png" alt="fMRI data" width="500"/>
 
 
-%%HTML
 <div align="middle">
 <video width="50%" controls>
       <source src="support/videos/emoprox2Exp.mp4" type="video/mp4">
