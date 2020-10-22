@@ -16,3 +16,10 @@ Functional magnetic resonance imaging (fMRI) data, RNN implementation to predict
 - Commonly used TR is 0.5-2 seconds per volume. TR = 1.25 seconds for the current study.
 
 <img src="./support/images/fmri-setup.png" alt="fMRI data" width="500"/>
+
+
+%%HTML
+<div align="middle">
+<video width="50%" controls>
+      <source src="support/videos/emoprox2Exp.mp4" type="video/mp4">
+</video></div>"
