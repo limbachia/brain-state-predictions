@@ -1,8 +1,9 @@
+from sklearn.model_selection import ShuffleSplit
 import logging
 import pickle as pkl
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import ShuffleSplit
+import copy
 
 class Dataset:
     '''
@@ -114,3 +115,34 @@ def query_dataset(dataset_df, idx_participants):
     Y = np.stack(rows.label.values, 
                  axis=0).astype(np.float64)
     return X, Y
+
+
+def selective_segments(dataset,TP='all'):
+    '''
+    Input
+    -----
+    dataset: dataset dictionary (saved as pkl file)
+    TP: timepoint
+        int (0,1,2,3,4,or 5) or string (only 'all' is allowed))
+        
+    Return
+    ------
+    SEGMENTS: dataset dictionary only with those segment 
+             indicated by TP. If TP = 'all', returns
+             segments for all TPs
+    '''
+    TP_map = {0:5, 1:4, 2:3, 3:2, 4:1, 5:0}
+    SEGMENTS = copy.deepcopy(dataset)
+    if TP == 'all':
+        for subj in SEGMENTS:
+            data = SEGMENTS[subj]['data']
+            SEGMENTS[subj]['data'] = data.reshape((data.shape[:2])
+                                                  +(data.shape[-2]*data.shape[-1],))
+    elif TP in list(range(6)):
+        for subj in SEGMENTS:
+            data = SEGMENTS[subj]['data']
+            SEGMENTS[subj]['data'] = data[:,:,:,TP_map[TP]]
+    else:
+        raise ValueError('int:0,1,2,3,4,5 and str:"all" are only valid TP values')
+        
+    return SEGMENTS

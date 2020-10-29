@@ -23,6 +23,22 @@ def classifier(train_X, train_Y,
                epochs=20, 
                batch_size=32,
                seed=42):
+    '''
+    A sequence-to-vector GRU model.
+    
+    Parameters
+    ----------
+    train_X: numpy array (batch x time X rois)
+    train_y: numpy array (batch x 1)
+    l2: L2 regularization (float)
+    dropout: dropout fraction (float)
+    batch_size: int, default = 32
+    seed: int, default = 42
+    
+    Returns
+    -------
+    model: trained model
+    '''
     
     np.random.seed(seed)
     regularizer = keras.regularizers.l2(l2)
@@ -31,17 +47,20 @@ def classifier(train_X, train_Y,
                         dropout=dropout,recurrent_dropout=dropout)
     
     model = keras.models.Sequential([
-                              CustomGRU(16,return_sequences=True,input_shape=[None, train_X.shape[-1]]),
+                              CustomGRU(16,return_sequences=True,
+                                        input_shape=[None, 
+                                                     train_X.shape[-1]]),
                               CustomGRU(16,return_sequences=True),
                               CustomGRU(16),
                               keras.layers.Dense(1,activation='sigmoid')
                               ])
     optimizer = keras.optimizers.Adam(lr=lr)
-    model.compile(loss="binary_crossentropy",optimizer=optimizer,metrics=['acc'])
-    model.fit(train_X,train_Y,epochs=epochs, validation_split=0.2,batch_size=batch_size,verbose=0)
+    model.compile(loss="binary_crossentropy",
+                  optimizer=optimizer,metrics=['acc'])
+    model.fit(train_X,train_Y,epochs=epochs,
+              validation_split=0.2,batch_size=batch_size,verbose=0)
 
     return model
-
 
 class MajorityVoteClassifier:
     """ Majority Vote Classifier 
