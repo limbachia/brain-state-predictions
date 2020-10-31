@@ -78,7 +78,7 @@ def organize_dataset(dataset):
             trial_list = [idx_trial] * 2
             data_list = [data[:7, :, idx_trial], data[7:, :, idx_trial]]
             #target_list = [target[:7, idx_trial], target[7:, idx_trial]]
-            label_list = [0, 1]
+            label_list = [1, 0]
             
             dfs.append(pd.DataFrame({"participant":participant_list,
                                      "trial":trial_list,

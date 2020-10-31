@@ -1,5 +1,4 @@
 from tensorflow import keras
-from tqdm import tqdm
 from functools import partial
 from collections import defaultdict
 from sklearn.model_selection import ParameterGrid
@@ -51,8 +50,8 @@ def classifier(train_X, train_Y,
                                         input_shape=[None, 
                                                      train_X.shape[-1]]),
                               CustomGRU(16,return_sequences=True),
-                              CustomGRU(16),
-                              keras.layers.Dense(1,activation='sigmoid')
+                              CustomGRU(16,return_sequences=True),
+                              keras.layers.TimeDistributed(keras.layers.Dense(1,activation='sigmoid'))
                               ])
     optimizer = keras.optimizers.Adam(lr=lr)
     model.compile(loss="binary_crossentropy",
