@@ -1,5 +1,4 @@
 import os
-import logging
 import subprocess
 import pandas as pd
 
@@ -43,7 +42,7 @@ def download(subj,regs_fancy=True):
            "climbach@login.bswift.umd.edu:/data/bswift-1/Pessoa_Lab/eCON/dataset/results_ShockCensored/{0}/uncontrollable/parametric/{0}_EP_TR_MNI_2mm_SI_denoised_NoBaseline.nii.gz".format(subj),
            "/home/climbach/approach-retreat/data/raw/{}".format(subj)]
     
-    logging.info("Downloading {}'s func data and its regressor files".format(subj))
+    print("Downloading {}'s func data and its regressor files".format(subj))
     
     run_process(cmd)
     
@@ -67,5 +66,5 @@ def download_all():
     subjs = subjs.query("use==1")['uncontrol'].values
     
     for subj in subjs:
-        logging.info("Downloading {}'s func data and its regressor files".format(subj))
+        print("Downloading {}'s func data and its regressor files".format(subj))
         download(subj)

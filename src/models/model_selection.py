@@ -11,7 +11,6 @@ import tensorflow as tf
 import numpy as np
 import pandas as pd
 import random
-import logging
 
 # Define variables
 batch_size = 32
@@ -38,8 +37,8 @@ def classifier(train_X, train_Y,
     -------
     model: trained model
     '''
-    
-    np.random.seed(seed)
+    tf.random.set_seed(seed)
+    #np.random.seed(seed)
     regularizer = keras.regularizers.l2(l2)
     CustomGRU = partial(keras.layers.GRU,
                         kernel_regularizer=regularizer,
@@ -60,50 +59,6 @@ def classifier(train_X, train_Y,
               validation_split=0.2,batch_size=batch_size,verbose=0)
 
     return model
-
-class MajorityVoteClassifier:
-    """ Majority Vote Classifier 
-    
-    This class contains the `fit` and `predict` methods that are compatible
-    with the sklearn model classes.
-    """
-    
-    def __init__(self):
-        self.majority_vote = None
-        
-    def fit(self,X, y):
-        self.majority_vote = round(y.mean())
-        
-    def predict(self, X):
-        if self.majority_vote is None:
-            raise ValueError("The majority vote classifier has to be trained before making predictions")
-        return [self.majority_vote]*len(X)
-    
-    
-def run_majority_vote(X_train, X_test, y_train, y_test):
-    """ Use the majority vote to predict survival.
-    
-    Parameters
-    ----------
-    X_train: numpy.ndarray
-    X_test: numpy.ndarray
-    y_train: numpy.ndarray
-    y_test: numpy.ndarray
-    
-    """
-    
-    logging.info("Running the majority vote classifier")
-    
-    majority_vote_classifier = MajorityVoteClassifier()
-    majority_vote_classifier.fit(X_train, y_train)
-    y_test_predictions = majority_vote_classifier.predict(X_test)
-    
-    accuracy = accuracy_score(y_true=y_test, y_pred=y_test_predictions)
-    
-    logging.info('The prediction accuracy with the majority vote classifier is {:.1f}%'.format(accuracy*100))
-    
-    return majority_vote_classifier
-
 
 def cross_validate(dataset_df, subjID_idx, classifier, params, cv=5):
     '''
@@ -127,15 +82,15 @@ def cross_validate(dataset_df, subjID_idx, classifier, params, cv=5):
     cv = 0
     for train_idx, val_idx in kf.split(subjID_idx):
         cv += 1
-        logging.info('CV Fold: ',cv)
+        print('CV Fold: ',cv)
         train_X, train_Y = query_dataset(dataset_df, train_idx)
         val_X, val_Y = query_dataset(dataset_df, val_idx)
-        logging.info('Training.....')
+        print('Training.....')
         model = classifier(train_X, train_Y, params['L2'], 
                            params['dropout'],  
                            params['lr'], 
                            epochs=20, batch_size=batch_size)
-        logging.info('completed!')
+        print('completed!')
         train_acc = model.evaluate(train_X,train_Y)[1]
         val_acc = model.evaluate(val_X,val_Y)[1]
         results['fold%i' %(cv)]['train'].append(train_acc)
@@ -167,7 +122,7 @@ class MyGridSearchCV:
     
         # Start grid search
         for n, params in enumerate(param_grid):
-            logging.info('\nModel %i' %(n))
+            print('\nModel %i' %(n))
             results['model%i' %(n)] = cross_validate(dataset_df, 
                                                      subjID_idx, 
                                                      classifier, 
@@ -175,3 +130,56 @@ class MyGridSearchCV:
                                                      cv=cv)
 
         self.results, self.param_grid = results, param_grid
+
+def permute(train_X, train_Y, val_X, val_Y, params, k_perm=1000):
+    '''
+    Inputs
+    ------
+    train_X: (train_batch_size x time x features)
+    train_Y: (train_batch_size,)
+    val_X: (val_batch_size x time x features)
+    val_Y: (val_batch_size,)
+    params: dict(L2: 0.003, dropout:0.3, ;lr:0.001)
+    k_perm: number of times training labels should be shuffled
+            and trained. For example, if k_perm = 100,
+            training labels will be shuffled 100 times, and 
+            after each shuffle trainig will take place on the 
+            training set and testing will take place on the 
+            non-shuffled validation set.
+            
+    Returns
+    -------
+    null_accu_dist: validation set accuracy array of size (k_perm,).
+    '''
+    results_rand = {}
+    for method in 'train val'.split():
+        results_rand[method] = []
+
+    tf.random.set_seed(330)
+    for i_perm in range(k_perm):
+        if i_perm % (k_perm//10) == 0:
+            print("--------perm = %d--------" %(i_perm))
+        '''
+        permute training labels,
+        retain test labels
+        https://www.ncbi.nlm.nih.gov/pubmed/19070668
+        '''
+        train_Y_perm = train_Y.copy()
+        np.random.shuffle(train_Y_perm)
+
+        model = classifier(train_X,train_Y_perm,
+                           params['L2'],
+                           params['dropout'],
+                           params['lr'])
+
+        train_acc = model.evaluate(train_X, train_Y_perm)[1]
+        val_acc = model.evaluate(val_X, val_Y)[1]
+
+        if i_perm % (k_perm//10) == 0:
+            print('permuted train acc: %.3f' %(train_acc))
+            print('permuted val acc: %.3f' %(val_acc))
+
+        results_rand['train'].append(train_acc)
+        results_rand['val'].append(val_acc)
+
+    return results_rand

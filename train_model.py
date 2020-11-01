@@ -10,11 +10,6 @@ import os
 from src.preprocess.dataset import *
 from src.models.model_selection import classifier
 
-def _info(s):
-    print('---------')
-    print(s)
-    print('---------')
-
 def run(args):
     print(args.GSCV)
     print(args.data)
@@ -62,8 +57,7 @@ def run(args):
     print('\nTest Accuracy: %.2f'%test_acc)
 
     os.makedirs(os.path.dirname(args.output),exist_ok=True)
-    #model.save(args.output)
-    print('\nmodel.save({})'.format(args.output))
+    model.save(args.output)
     
 if __name__ == "__main__":
     '''

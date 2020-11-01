@@ -1,5 +1,4 @@
 from sklearn.model_selection import ShuffleSplit
-import logging
 import pickle as pkl
 import pandas as pd
 import numpy as np
