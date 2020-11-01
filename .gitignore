@@ -145,3 +145,5 @@ tensorflow/
 data/
 
 results/
+models/*
+_build/
