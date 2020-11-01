@@ -144,3 +144,4 @@ src/data/__pycache__/
 tensorflow/
 data/
 
+results/
