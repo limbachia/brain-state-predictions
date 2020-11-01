@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Introduction &#8212; Brain State Predictions</title>
+    <title>Introduction &#8212; Brain State Predictions</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -55,7 +55,6 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Brain State Predictions During Approaching and Retreating Threats: An fMRI Study." href="landing-page.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -93,25 +92,20 @@
   Brain State Prediction
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/01-ROI316_last_segment/00-intro.html">
    1. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#methods">
+  <a class="reference internal" href="notebooks/01-ROI316_last_segment/01-methods.html">
    2. Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#results">
+  <a class="reference internal" href="notebooks/01-ROI316_last_segment/02-results.html">
    3. Results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#demonstration">
-   4. Demonstration
   </a>
  </li>
 </ul>
@@ -223,68 +217,68 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   1. Introduction
+   Introduction
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#what-is-fmri-data">
-     1.1. What is fMRI data?
+     What is fMRI data?
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#typical-fmri-setup">
-     1.2. Typical fMRI setup
+     Typical fMRI setup
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#methods">
-   2. Methods
+   Methods
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#procedure-visual-stimuli">
-     2.1. Procedure &amp; Visual Stimuli
+     Procedure &amp; Visual Stimuli
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#preprocessing">
-     2.2. Preprocessing
+     Preprocessing
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#training-data">
-     2.3. Training Data
+     Training Data
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#model">
-     2.4. Model
+     Model
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#results">
-   3. Results
+   Results
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#accuracy-across-cross-validation-cv-folds">
-     3.1. Accuracy across cross-validation (cv) folds
+     Accuracy across cross-validation (cv) folds
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#test-accuracy">
-     3.2. Test accuracy
+     Test accuracy
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#demonstration">
-   4. Demonstration
+   Demonstration
   </a>
  </li>
 </ul>
@@ -299,11 +293,11 @@
               <div>
                 
   <div class="section" id="introduction">
-<h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>Different stimuli evoke different brain response, which allows an organism to respond to a stimulus of a particular kind in a particular way. Therefore an interesting question that can be asked about the brain-stimuli relationship is: can one predict the stimuli by looking at the evoked brain response?</p>
 <p>In this paroject, dynamic brain activity patterns of human subjects, captured by fMRI, in response to approaching and retreating threats is used to predict the stimulus class.</p>
 <div class="section" id="what-is-fmri-data">
-<h2><span class="section-number">1.1. </span>What is fMRI data?<a class="headerlink" href="#what-is-fmri-data" title="Permalink to this headline">¶</a></h2>
+<h2>What is fMRI data?<a class="headerlink" href="#what-is-fmri-data" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Functional Magnetic Resonance Imaging (fMRI) is a timeseries data.</p></li>
 <li><p>Like a movie of the brain.</p></li>
@@ -313,10 +307,10 @@
 <li><p>Rate at which fMRI data is collected is commonly referred to as repetition time (TR).</p></li>
 <li><p>Commonly used TR is 0.5-2 seconds per volume. TR = 1.25 seconds for the current study.</p></li>
 </ul>
-<a class="reference internal image-reference" href="_images/fmridata.png"><img alt="fMRI data" src="_images/fmridata.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/fmridata1.png"><img alt="fMRI data" src="_images/fmridata1.png" style="width: 600px;" /></a>
 </div>
 <div class="section" id="typical-fmri-setup">
-<h2><span class="section-number">1.2. </span>Typical fMRI setup<a class="headerlink" href="#typical-fmri-setup" title="Permalink to this headline">¶</a></h2>
+<h2>Typical fMRI setup<a class="headerlink" href="#typical-fmri-setup" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Participant views a visual stimuli on a projection screen via a mirror mounted to the scanner’s head coil.</p></li>
 <li><p>Head coil measures the brain signal.</p></li>
@@ -326,9 +320,9 @@
 </div>
 </div>
 <div class="section" id="methods">
-<h1><span class="section-number">2. </span>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h1>
+<h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="procedure-visual-stimuli">
-<h2><span class="section-number">2.1. </span>Procedure &amp; Visual Stimuli<a class="headerlink" href="#procedure-visual-stimuli" title="Permalink to this headline">¶</a></h2>
+<h2>Procedure &amp; Visual Stimuli<a class="headerlink" href="#procedure-visual-stimuli" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>fMRI data was collected on 61 participants.</p></li>
 <li><p>Forty-five minutes of fMRI data was collected on every participant.</p></li>
@@ -345,7 +339,7 @@
 </div>
 </div>
 <div class="section" id="preprocessing">
-<h2><span class="section-number">2.2. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h2>
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>fMRI timeseries data suffers from a lot of noise such as,</p>
 <ul>
@@ -358,7 +352,7 @@
 </ul>
 </div>
 <div class="section" id="training-data">
-<h2><span class="section-number">2.3. </span>Training Data<a class="headerlink" href="#training-data" title="Permalink to this headline">¶</a></h2>
+<h2>Training Data<a class="headerlink" href="#training-data" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Out of the 45 minute long timeseries data, “segments” corresponding to near-miss events were extracted.</p></li>
 <li><p>Each segment was 14 timepoints long (14 x 1.25 = 17.5 seconds): first 7 timepoints corresponded to <strong>approach</strong>, and later 7 to <strong>retreat</strong>.</p></li>
@@ -478,19 +472,16 @@ shown above was extended as follows:</p>
 </div>
 </li>
 <li><p>Retreat segments were extended in the same fashion. Following shows the original segments and their extensions.</p></li>
+<li><p>Out of 61 participants, only 42 participants data was used to train and validate the predictive model. Remaining 19 participants data was used to test the model.</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="_images/training_data_description_15_0.png" src="_images/training_data_description_15_0.png" />
 </div>
 </div>
-<ul class="simple">
-<li><p>Segments only from 42 out of 61 paticipants were used for training and cross validating the model.</p></li>
-<li><p>Segments of remaining participants were held out to test the model performance.</p></li>
-</ul>
 </div>
 <div class="section" id="model">
-<h2><span class="section-number">2.4. </span>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
 <p>A Reccurent Neural Network (RNN) with Gated Recurrent Units (GRU) was used to build a predictive model. The RNN had three hidden layers, each with 16 GRU units, and a dense output layer with single unit. <code class="docutils literal notranslate"><span class="pre">binary_crossentropy</span></code> was used as the loss function which was minimized using an <code class="docutils literal notranslate"><span class="pre">Adam</span></code> optimizer. Following was the model architecture:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -517,9 +508,9 @@ _________________________________________________________________
 </div>
 </div>
 <div class="section" id="results">
-<h1><span class="section-number">3. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h1>
+<h1>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="accuracy-across-cross-validation-cv-folds">
-<h2><span class="section-number">3.1. </span>Accuracy across cross-validation (cv) folds<a class="headerlink" href="#accuracy-across-cross-validation-cv-folds" title="Permalink to this headline">¶</a></h2>
+<h2>Accuracy across cross-validation (cv) folds<a class="headerlink" href="#accuracy-across-cross-validation-cv-folds" title="Permalink to this headline">¶</a></h2>
 <p>Optimal hyper-parameters for L2 regularization, dropout and learning rate were found using a grid-search, 5-fold CV appraoch. Best performing model yielded an accuracy of <strong>0.86</strong> and <strong>0.77</strong> on training and validation sets. Hyperparameters of the best performing model were: L2 regularization of <strong>0.001</strong>, dropout rate of <strong>0.4</strong>, and learning rate of <strong>0.001</strong>. Following plot shows mean accruary across CV folds.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -527,21 +518,21 @@ _________________________________________________________________
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/training_data_description_23_0.png" src="_images/training_data_description_23_0.png" />
+<img alt="_images/training_data_description_22_0.png" src="_images/training_data_description_22_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="test-accuracy">
-<h2><span class="section-number">3.2. </span>Test accuracy<a class="headerlink" href="#test-accuracy" title="Permalink to this headline">¶</a></h2>
+<h2>Test accuracy<a class="headerlink" href="#test-accuracy" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/training_data_description_26_0.png" src="_images/training_data_description_26_0.png" />
+<img alt="_images/training_data_description_25_0.png" src="_images/training_data_description_25_0.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="demonstration">
-<h1><span class="section-number">4. </span>Demonstration<a class="headerlink" href="#demonstration" title="Permalink to this headline">¶</a></h1>
+<h1>Demonstration<a class="headerlink" href="#demonstration" title="Permalink to this headline">¶</a></h1>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/1kEyAODFNLk??rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></div></div>
@@ -576,7 +567,6 @@ _________________________________________________________________
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="landing-page.html" title="previous page">Brain State Predictions During Approaching and Retreating Threats: An fMRI Study.</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
