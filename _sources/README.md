@@ -3,5 +3,13 @@
 
 Functional magnetic resonance imaging (fMRI) data, RNN implementation to predict brain states during anticipation of aversive and neutral events.
 
-Check `requirements.txt` for packages required to run this project.
-`requirements.txt` generated using `pip freeze | grep -v src > requirements.txt`
+## Requirements
+
+To install requirements:
+```setup
+pip install -r requirements.txt
+```
+
+> CUDA version 10.0.130
+
+Data: proprietary
