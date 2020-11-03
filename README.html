@@ -1,10 +1,9 @@
 
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brain State Predictions During Approaching and Retreating Threats: An fMRI Study. &#8212; Brain State Predictions</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -46,6 +45,8 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -193,27 +194,6 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-is-fmri-data">
-     What is fMRI data?
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-        </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -225,24 +205,8 @@
 <h1>Brain State Predictions During Approaching and Retreating Threats: An fMRI Study.<a class="headerlink" href="#brain-state-predictions-during-approaching-and-retreating-threats-an-fmri-study" title="Permalink to this headline">¶</a></h1>
 <p>==============================</p>
 <p>Functional magnetic resonance imaging (fMRI) data, RNN implementation to predict brain states during anticipation of aversive and neutral events.</p>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="what-is-fmri-data">
-<h3>What is fMRI data?<a class="headerlink" href="#what-is-fmri-data" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Functional Magnetic Resonance Imaging (fMRI).</p></li>
-<li><p>Timeseries data.</p></li>
-<li><p>Like a movie of the brain.</p></li>
-<li><p>Each frame (timepoint) is a 3D volume.</p></li>
-<li><p>Rate at which fMRI data is collected is commonly referred to as repetition time (TR).</p></li>
-<li><p>Commonly used TR is 0.5-2 seconds per volume. TR = 1.25 seconds for the current study.</p></li>
-</ul>
-<a class="reference internal image-reference" href="_images/fmri-setup.png"><img alt="fMRI data" src="_images/fmri-setup.png" style="width: 500px;" /></a>
-<div align="middle">
-<video width="50%" controls>
-      <source src="support/videos/emoprox2Exp.mp4" type="video/mp4">
-</video></div></div>
-</div>
+<p>Check <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> for packages required to run this project.
+<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> generated using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">freeze</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-v</span> <span class="pre">src</span> <span class="pre">&gt;</span> <span class="pre">requirements.txt</span></code></p>
 </div>
 
     <script type="text/x-thebe-config">

@@ -1,11 +1,8 @@
-Brain State Predictions
+# Brain State Predictions During Approaching and Retreating Threats: An fMRI Study.
 ==============================
 
-Functional magnetic resonance imaging (fMRI) data, RNN implementation to predict brain states during anticipation of aversive and neutral events.
+Functional magnetic resonance imaging (fMRI) data, LSTM (GRU) implementation to predict brain states during approaching and retreating threats.
 
-Python 3.6.9
-Check `requirements.txt` for packages required to run this project.
-`requirements.txt` was generated using `pip freeze | grep -v src > requirements.txt`
 
-Project Organization
---------------------
+
+
