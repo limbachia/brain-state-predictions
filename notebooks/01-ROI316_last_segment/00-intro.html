@@ -46,6 +46,8 @@
     <script src="../../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -240,15 +242,15 @@
                 
   <div class="section" id="introduction">
 <h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>Different stimuli evoke different brain response, which allows an organism to respond to a stimulus of a particular kind in a particular way. Therefore an interesting question that can be asked about the brain-stimuli relationship is: can one predict the stimuli by looking at the evoked brain response?</p>
+<p>Different stimuli evoke different brain response, which enables an organism to respond to a particular stimulus in a particular way. Interesting question about the brain-stimuli relationship is: can one predict the stimuli just based on the evoked brain response?</p>
 <p>In this paroject, dynamic brain activity patterns of human subjects, captured by fMRI, in response to approaching and retreating threats is used to predict the stimulus class.</p>
 <div class="section" id="what-is-fmri-data">
 <h2><span class="section-number">1.1. </span>What is fMRI data?<a class="headerlink" href="#what-is-fmri-data" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Functional Magnetic Resonance Imaging (fMRI) is a timeseries data.</p></li>
 <li><p>Like a movie of the brain.</p></li>
-<li><p>Each frame (timepoint) is a 3D volume.</p></li>
-<li><p>The unit of the 3D volume is a voxel (analogous to pixel of a 2D image).</p></li>
+<li><p>Each frame is a 3D volume that represents a timepoint.</p></li>
+<li><p>Unit of the 3D volume is a voxel (analogous to 2D image pixel).</p></li>
 <li><p>Dimensions of a voxel is generally 3mm x 3mm x 3mm.</p></li>
 <li><p>Rate at which fMRI data is collected is commonly referred to as repetition time (TR).</p></li>
 <li><p>Commonly employed TR is 0.5-2 seconds per volume. TR = 1.25 seconds for the current study.</p></li>
@@ -258,7 +260,7 @@
 <div class="section" id="typical-fmri-setup">
 <h2><span class="section-number">1.2. </span>Typical fMRI setup<a class="headerlink" href="#typical-fmri-setup" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Participant views a visual stimuli on a projection screen via a mirror mounted to the scanner’s head coil.</p></li>
+<li><p>Participant views visual stimuli on a projection screen via a mirror mounted to the scanner’s head coil.</p></li>
 <li><p>Head coil measures the brain signal.</p></li>
 </ul>
 <a class="reference internal image-reference" href="../../_images/fmri-setup1.png"><img alt="fMRI data" src="../../_images/fmri-setup1.png" style="width: 1000px;" /></a>

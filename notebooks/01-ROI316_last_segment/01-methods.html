@@ -260,8 +260,8 @@
 <li><p>Two circles moved around randomly on the projection screen.</p></li>
 <li><p>When circles collided, a mild but unpleasant electric shock was delivered to the index and middle fingers of participant’s left hand.</p></li>
 <li><p>Shock delivery was only meant to induce fear of circle collision.</p></li>
-<li><p>Several events of “near-miss” occured at random times during the experiment.</p></li>
-<li><p>Near-miss events are defined as those when the circles approach each other for at least 8 seconds, come very close (i.e., distance less than 1.5 times the circle diameter), but miss and start to retreat, again, at least for 8 seconds.</p></li>
+<li><p>Several “near-miss” events occured at random times during the experiment.</p></li>
+<li><p>Near-miss events are defined as those when the circles approach each other at least for 8 seconds, come very close (i.e., distance less than 1.5 times the circle diameter), but miss and start to retreat, again, at least for 8 seconds.</p></li>
 <li><p>Near-miss events were included to investigate brain’s dynamic response to approaching and retreating threats.</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
@@ -287,7 +287,7 @@
 <ul class="simple">
 <li><p>Out of the 45 minute long timeseries data, “segments” corresponding to near-miss events were extracted.</p></li>
 <li><p>Each segment was 14 timepoints long (14 x 1.25 = 17.5 seconds): first 7 timepoints corresponded to <strong>approach</strong>, and later 7 to <strong>retreat</strong>.</p></li>
-<li><p>Every participant had 46 segments. That is, approximately 13 out 45 minutes of data was used for training a predictive model.</p></li>
+<li><p>Every participant had 46 segments. That is, approximately 13 out 45 minutes of data was used to train and test the predictive model.</p></li>
 <li><p>Following is an example of a segment from the parietal cortex of the brain.</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
@@ -324,9 +324,9 @@
 </div>
 <div class="section" id="model">
 <h2><span class="section-number">2.4. </span>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<a class="reference internal image-reference" href="../../_images/model.png"><img alt="fMRI data" src="../../_images/model.png" style="height: 250px;" /></a>
-<p>A variant of Long-Short Term Memory (LSTM), Gated Recurrent Units (GRU) architecture was emplyed to characterize the spatio-temporal pattern in the fMRI data.</p>
-<p>The GRU architecture had three hidden layers, each with 16 GRU units, and an ouput time-distributed, dense layer (DL) with single unit. The time-distributed DL returned prediction at every timepoint. Following was the model architecture:</p>
+<a class="reference internal image-reference" href="../../_images/model.png"><img alt="fMRI data" src="../../_images/model.png" style="height: 150px;" /></a>
+<p>A variant of Long-Short Term Memory (LSTM), Gated Recurrent Units (GRU) architecture was employed to characterize the spatio-temporal pattern in the fMRI data.</p>
+<p>The GRU architecture had three hidden layers, each with 16 GRU units, and an ouput time-distributed, dense layer (DL) with single sigmoid activation unit. The time-distributed DL returned prediction at every timepoint. Following was the employed model architecture:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
