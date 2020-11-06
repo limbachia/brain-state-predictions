@@ -3,6 +3,6 @@
 
 - part: Brain State Prediction
   sections:
-  - file: notebooks/01-ROI316_last_segment/00-intro
-  - file: notebooks/01-ROI316_last_segment/01-methods
-  - file: notebooks/01-ROI316_last_segment/02-results
+  - file: notebooks/00-ROI316_last_segment/00-intro
+  - file: notebooks/00-ROI316_last_segment/01-methods
+  - file: notebooks/00-ROI316_last_segment/02-results

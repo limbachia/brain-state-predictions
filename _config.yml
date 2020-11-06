@@ -6,7 +6,8 @@ logo: "logo.png"
 exclude_patterns            : ["tensorflow/*","0*","99*",
                                 "training_data_description",
                                 "notebooks/00-ROI316_withShiftedSegments/*",
-                                "notebooks/01-ROI316_last_segment/99*"]
+                                "notebooks/00-ROI316_last_segment/99*",
+				"notebooks/03-rAI/*"]
 
 execute:
   exclude_patterns: ["tensorflow/lib/python3.6/site-packages/jupyter_book/book_template/notebooks","tensorflow/lib/python3.6/site-packages/matplotlib/backends/web_backend/nbagg_uat","tensorflow/lib/python3.6/site-packages/nbclient/tests/files/Autokill","0*","99*","notebooks/*"]
