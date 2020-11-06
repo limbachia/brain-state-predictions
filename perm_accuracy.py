@@ -14,7 +14,14 @@ def run(args):
     # Load data
     dataset = Dataset(args.data)
     dataset.load()
-    dataset_df = organize_dataset(selective_segments(dataset.data,int(args.time_point)))
+    if args.time_point == 'all':
+        print('Training using all timepoints')
+        dataset_df = organize_dataset(selective_segments(dataset.data))
+    elif args.time_point == 'None':
+        dataset_df = organize_dataset(selective_segments(dataset.data,None))
+    else:
+        print('Training using the %ith timepoint'%int(args.time_point))
+        dataset_df = organize_dataset(selective_segments(dataset.data,int(args.time_point)))
     dataset.train_test_split_sid()
     
     X_train, y_train = query_dataset(dataset_df,dataset.train_idx)
