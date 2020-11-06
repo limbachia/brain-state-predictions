@@ -1,5 +1,5 @@
 from src.preprocess.dataset import *
-from src.models.model_selection import classifier, run_majority_vote, MyGridSearchCV
+from src.models.model_selection import classifier, MyGridSearchCV
 import os
 import tensorflow as tf
 import argparse
@@ -36,6 +36,8 @@ def run(args):
     if args.time_point == 'all':
         print('Training using all timepoints')
         dataset_df = organize_dataset(selective_segments(dataset.data))
+    elif args.time_point == 'None':
+        dataset_df = organize_dataset(selective_segments(dataset.data,None))
     else:
         print('Training using the %ith timepoint'%int(args.time_point))
         dataset_df = organize_dataset(selective_segments(dataset.data,int(args.time_point)))
@@ -53,7 +55,7 @@ def run(args):
                   'lr':[float(val) for val in args.learning_rate.split(' ')]}
         print(params)
         grid_search = MyGridSearchCV()
-        grid_search.fit(dataset_df, dataset.train_idx, classifier, params,cv=5,n_models=None)
+        grid_search.fit(dataset_df, dataset.train_idx, classifier, params,cv=5,n_models=args.n_models)
         results = grid_search.results
         param_grid = grid_search.param_grid
         
@@ -78,7 +80,7 @@ if __name__ == '__main__':
                         help='path/to/segments/pkl/dataset')
     
     parser.add_argument('-tp','--time-point',type=str,
-                        default='all',help='which timepoint to use: 0,1,2,3,4,5 and all are valid options')
+                        default='all',help="which timepoint to use: 0,1,2,3,4,5, 'all' and None and all are valid options")
     
     parser.add_argument('-L2','--L2',
                         type=str,
@@ -99,7 +101,7 @@ if __name__ == '__main__':
     
     parser.add_argument('-n','--n-models',type=int,
                         default=None,
-                        help='number of random models to run')
+                        help='number of random models to run. Default is None (runs full grid-search)')
     
     parser.add_argument('-o','--out-data',type=str,
                         default=PROJ+'/results/00-ROI316_withShiftedSegments/grid_search_results.pkl',

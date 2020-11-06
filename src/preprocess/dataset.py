@@ -141,7 +141,9 @@ def selective_segments(dataset,TP='all'):
         for subj in SEGMENTS:
             data = SEGMENTS[subj]['data']
             SEGMENTS[subj]['data'] = data[:,:,:,TP_map[TP]]
+    elif not TP:
+        pass
     else:
-        raise ValueError('int:0,1,2,3,4,5 and str:"all" are only valid TP values')
+        raise ValueError('int:0,1,2,3,4,5, str: "all" and None are the only valid TP values. Use None if the dataset does not have shifted segments.')
         
     return SEGMENTS

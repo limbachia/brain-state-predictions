@@ -114,8 +114,10 @@ class MyGridSearchCV:
         
         if n_models:
             random.seed(47)
+            print('%i hyperparameter combinations selected from total %i combinations' %(n_models,len(list(ParameterGrid(param_grid)))))
             param_grid = random.sample(list(ParameterGrid(param_grid)), n_models)
         else:
+            print('Running all %i hyperparameter combinations' %(len(list(ParameterGrid(param_grid)))))
             param_grid = list(ParameterGrid(param_grid))
     
         results = defaultdict(dict)
