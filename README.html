@@ -1,9 +1,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brain State Predictions During Approaching and Retreating Threats: An fMRI Study. &#8212; Brain State Predictions</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -45,7 +46,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
@@ -209,6 +210,11 @@
    Requirements
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tuning-training-evaluation">
+   Tuning, Training &amp; Evaluation
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -222,7 +228,6 @@
                 
   <div class="section" id="brain-state-predictions-during-approaching-and-retreating-threats-an-fmri-study">
 <h1>Brain State Predictions During Approaching and Retreating Threats: An fMRI Study.<a class="headerlink" href="#brain-state-predictions-during-approaching-and-retreating-threats-an-fmri-study" title="Permalink to this headline">¶</a></h1>
-<p>==============================</p>
 <p>Functional magnetic resonance imaging (fMRI) data, RNN implementation to predict brain states during anticipation of aversive and neutral events.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -233,7 +238,37 @@
 <blockquote>
 <div><p>CUDA version 10.0.130</p>
 </div></blockquote>
-<p>Data: proprietary</p>
+<p>Data: Proprietary</p>
+</div>
+<div class="section" id="tuning-training-evaluation">
+<h2>Tuning, Training &amp; Evaluation<a class="headerlink" href="#tuning-training-evaluation" title="Permalink to this headline">¶</a></h2>
+<p>To find best hyperparameters like <code class="docutils literal notranslate"><span class="pre">L2</span></code>, <code class="docutils literal notranslate"><span class="pre">dropout</span></code>, and <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> for the GRU classifier
+using a cross-validation, gri-search approach:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">data</span> <span class="o">&lt;</span><span class="n">path</span> <span class="n">to</span> <span class="n">segments</span> <span class="n">dataset</span> <span class="n">pickle</span> <span class="n">file</span><span class="o">&gt;</span> \
+    <span class="o">--</span><span class="n">time</span><span class="o">-</span><span class="n">point</span> <span class="mi">5</span> <span class="o">--</span><span class="n">L2</span> <span class="s1">&#39;0 0.001 0.003 0.01 0.03&#39;</span> <span class="o">--</span><span class="n">dropout</span> <span class="s1">&#39;0 0.1 0.2 0.3 0.4&#39;</span> \
+    <span class="o">--</span><span class="n">learning</span><span class="o">-</span><span class="n">rate</span> <span class="s1">&#39;0.001 0.003 0.006&#39;</span> <span class="o">--</span><span class="n">cv</span> <span class="o">&lt;</span><span class="n">number</span> <span class="n">of</span> <span class="n">folds</span><span class="o">&gt;</span> \
+    <span class="o">--</span><span class="n">n</span><span class="o">-</span><span class="n">models</span> <span class="o">&lt;</span><span class="n">number</span> <span class="n">of</span> <span class="n">random</span> <span class="n">models</span> <span class="n">to</span> <span class="n">run</span> <span class="n">a</span> <span class="n">randomized</span> <span class="n">grid</span><span class="o">-</span><span class="n">search</span> <span class="p">(</span><span class="n">skip</span> <span class="n">to</span> <span class="n">search</span> <span class="n">the</span> <span class="n">entire</span> <span class="n">grid</span><span class="p">)</span><span class="o">&gt;</span> \
+    <span class="o">--</span><span class="n">out</span><span class="o">-</span><span class="n">data</span> <span class="o">&lt;</span><span class="n">declare</span> <span class="n">path</span> <span class="ow">and</span> <span class="n">output</span> <span class="n">file</span> <span class="n">name</span> <span class="p">(</span><span class="n">end</span> <span class="k">with</span> <span class="n">extension</span> <span class="s1">&#39;.pkl&#39;</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">grid_search.py</span></code> script can be used to find the best combination of <code class="docutils literal notranslate"><span class="pre">L2</span></code>, <code class="docutils literal notranslate"><span class="pre">dropout</span></code>, and <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> by specifying a range of values for each hyperparameter (as in the above example). It can also be used to simply get a k-fold cross-validation performance for a single combination of hyperparameters. This can be done by specifying single values for every hyperparameter and skipping the <code class="docutils literal notranslate"><span class="pre">--n-models</span></code> option.</p>
+<hr class="docutils" />
+<p>To train a model using the best hyperparameters and save it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">train_model</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">GSCV</span> <span class="o">&lt;</span><span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">output</span> <span class="n">of</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">py</span><span class="o">&gt;</span> \
+    <span class="o">-</span><span class="n">data</span> <span class="o">&lt;</span><span class="n">path</span> <span class="n">to</span> <span class="n">segments</span> <span class="n">dataset</span> <span class="n">pickle</span> <span class="n">file</span><span class="o">&gt;</span> \
+    <span class="o">-</span><span class="n">tp</span> <span class="mi">5</span> <span class="o">-</span><span class="n">overwrite</span> <span class="o">&lt;</span><span class="n">overwrite</span> <span class="n">previous</span> <span class="n">output</span><span class="p">:</span> <span class="mi">0</span> <span class="p">(</span><span class="n">default</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">1</span><span class="o">&gt;</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="o">&lt;</span><span class="n">declare</span> <span class="n">path</span> <span class="ow">and</span> <span class="n">model</span> <span class="n">name</span> <span class="p">(</span><span class="n">end</span> <span class="k">with</span> <span class="n">extension</span> <span class="s1">&#39;.h5&#39;</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>To get chance chance accuracy distribution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">perm_accuracy</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">data</span> <span class="o">&lt;</span><span class="n">path</span> <span class="n">to</span> <span class="n">segments</span> <span class="n">dataset</span> <span class="n">pickle</span> <span class="n">file</span><span class="o">&gt;</span> \
+    <span class="o">-</span><span class="n">tp</span> <span class="mi">5</span> <span class="o">--</span><span class="n">best</span><span class="o">-</span><span class="n">L2</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">best</span><span class="o">-</span><span class="n">dropout</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">best</span><span class="o">-</span><span class="n">lerning</span><span class="o">-</span><span class="n">rate</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> \
+    <span class="o">-</span><span class="n">k_perms</span> <span class="o">&lt;</span><span class="n">number</span> <span class="n">of</span> <span class="n">permutations</span> <span class="n">to</span> <span class="n">perform</span> <span class="p">(</span><span class="n">default</span> <span class="ow">is</span> <span class="mi">1000</span><span class="p">)</span><span class="o">&gt;</span> \
+    <span class="o">-</span><span class="n">overwrite</span> <span class="o">&lt;</span><span class="n">overwrite</span> <span class="n">previous</span> <span class="n">output</span><span class="p">:</span> <span class="mi">0</span> <span class="p">(</span><span class="n">default</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">1</span><span class="o">&gt;</span> \
+    <span class="o">--</span><span class="n">output</span> <span class="o">&lt;</span><span class="n">declare</span> <span class="n">path</span> <span class="ow">and</span> <span class="n">output</span> <span class="n">file</span> <span class="n">name</span> <span class="p">(</span><span class="n">end</span> <span class="k">with</span> <span class="n">extension</span> <span class="s1">&#39;.pkl&#39;</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
 </div>
 </div>
 
