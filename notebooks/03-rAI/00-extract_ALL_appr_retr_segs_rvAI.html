@@ -1,0 +1,1205 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extract not just near-miss but all approach/retreat segments that are at least 3 TRs long &#8212; Brain State Predictions</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Brain State Predictions</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Brain State Prediction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00-ROI316_last_segment/00-intro.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00-ROI316_last_segment/01-methods.html">
+   2. Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00-ROI316_last_segment/02-results.html">
+   3. Results: Whole Brain (316 ROIs)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-results.html">
+   4. Results: Right Insula
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/03-rAI/00-extract_ALL_appr_retr_segs_rvAI.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/limbachia/brain-state-predictions"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/limbachia/brain-state-predictions/issues/new?title=Issue%20on%20page%20%2Fnotebooks/03-rAI/00-extract_ALL_appr_retr_segs_rvAI.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/limbachia/brain-state-predictions/edit/master/notebooks/03-rAI/00-extract_ALL_appr_retr_segs_rvAI.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/limbachia/brain-state-predictions/master?urlpath=tree/notebooks/03-rAI/00-extract_ALL_appr_retr_segs_rvAI.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="extract-not-just-near-miss-but-all-approach-retreat-segments-that-are-at-least-3-trs-long">
+<h1>Extract not just near-miss but all approach/retreat segments that are at least 3 TRs long<a class="headerlink" href="#extract-not-just-near-miss-but-all-approach-retreat-segments-that-are-at-least-3-trs-long" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span><span class="p">,</span> <span class="n">exists</span><span class="p">,</span> <span class="n">isfile</span> 
+
+<span class="kn">import</span> <span class="nn">nilearn</span> <span class="k">as</span> <span class="nn">nil</span>
+<span class="kn">from</span> <span class="nn">nilearn.masking</span> <span class="kn">import</span> <span class="n">apply_mask</span><span class="p">,</span> <span class="n">unmask</span>
+<span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_glass_brain</span>
+
+<span class="kn">from</span> <span class="nn">src.preprocess.stim_times</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="k">def</span> <span class="nf">getSelectedStims</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameter</span>
+<span class="sd">    ---------</span>
+<span class="sd">    line: single line of strings that consist of multiple stim onsets and durations.</span>
+<span class="sd">            For example: &quot;2.20:8.97 15.50:7.25 30.00:6.36\n&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple of numpy.1darray</span>
+<span class="sd">        sel_onsets, sel_durs: those onsets which have duration greater then 3.75 seconds.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">onsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">onset</span><span class="p">)</span> <span class="k">for</span> <span class="n">onset</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="n">pair</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()]])</span>
+    <span class="n">durs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">dur</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">dur</span> <span class="ow">in</span> <span class="p">[</span><span class="n">pair</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()]])</span>
+    <span class="n">sel_onsets</span> <span class="o">=</span> <span class="n">onsets</span><span class="p">[</span><span class="n">durs</span><span class="o">&gt;=</span><span class="mf">3.75</span><span class="p">]</span>
+    <span class="n">sel_durs</span> <span class="o">=</span> <span class="n">durs</span><span class="p">[</span><span class="n">durs</span><span class="o">&gt;=</span><span class="mf">3.75</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sel_onsets</span><span class="p">,</span> <span class="n">sel_durs</span>
+
+
+<span class="k">def</span> <span class="nf">tmp_df</span><span class="p">(</span><span class="n">subj</span><span class="p">,</span><span class="n">seg</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subj: subj ID &lt;str&gt;</span>
+<span class="sd">    seg: current run&#39;s appraoch/retreat sequence &lt;(time x feature) numpy.array&gt;</span>
+<span class="sd">    label: 1. (approach) or 0. (retreat) &lt;float&gt;</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tmp_df: pd.Dataframe with columns: Subject, timepoint,feat_# and label</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">n_vox</span> <span class="o">=</span> <span class="n">seg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;feat_</span><span class="si">%i</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">ii</span> for ii in range(n_vox)]
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span><span class="s1">&#39;timepoint&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">features</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">seg</span><span class="p">:</span>
+        <span class="n">tmp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+        <span class="n">tmp_df</span><span class="p">[</span><span class="s1">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subj</span>
+        <span class="n">tmp_df</span><span class="p">[</span><span class="s1">&#39;TimePoint&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">seq</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">tmp_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span><span class="n">tmp_df</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Project path</span>
+<span class="n">raw_path</span> <span class="o">=</span> <span class="s1">&#39;/home/climbach/approach-retreat/data/raw&#39;</span>
+<span class="n">processed_path</span> <span class="o">=</span> <span class="s1">&#39;/home/climbach/approach-retreat/data/processed&#39;</span>
+
+<span class="n">yoked</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">raw_path</span><span class="p">,</span><span class="s1">&#39;CON_yoked_table.xlsx&#39;</span><span class="p">))</span>
+<span class="n">yoked</span> <span class="o">=</span> <span class="n">yoked</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;use == 1&#39;</span><span class="p">)</span>
+
+<span class="n">run_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;run</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">yoked</span><span class="p">[[</span><span class="s1">&#39;control&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">run_vars</span><span class="p">]</span>
+<span class="n">uncontrol</span> <span class="o">=</span> <span class="n">yoked</span><span class="p">[[</span><span class="s1">&#39;uncontrol&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">run_vars</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Load right ventro-anterior insula mask </span>
+<span class="n">mask</span><span class="o">=</span> <span class="n">nil</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">processed_path</span><span class="p">,</span><span class="s1">&#39;masks/00b-Schaefer2018_300Parcels_17Networks_order_afniMNI152_2mm_GM.nii.gz&#39;</span><span class="p">))</span>
+<span class="n">rvAI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">())</span>
+<span class="n">rvAI</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span> <span class="o">==</span> <span class="mi">230</span><span class="p">,</span><span class="n">mask</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span> <span class="o">==</span> <span class="mi">231</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">rvAI</span> <span class="o">=</span> <span class="n">nil</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">new_img_like</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="n">rvAI</span><span class="p">)</span>
+
+<span class="n">plot_glass_brain</span><span class="p">(</span><span class="n">rvAI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoProjector at 0x7f14f2c41eb8&gt;
+</pre></div>
+</div>
+<img alt="../../_images/00-extract_ALL_appr_retr_segs_rvAI_3_1.png" src="../../_images/00-extract_ALL_appr_retr_segs_rvAI_3_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to approach timings</span>
+<span class="n">appr_file_path</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">raw_path</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">{subj}</span><span class="s1">/splitted_regs_fancy/</span><span class="si">{subj}</span><span class="s1">_closeAllApprMR.txt&#39;</span><span class="p">)</span>
+<span class="c1"># Path to retreat timings</span>
+<span class="n">retr_file_path</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">raw_path</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">{subj}</span><span class="s1">/splitted_regs_fancy/</span><span class="si">{subj}</span><span class="s1">_closeAllRetrMR.txt&#39;</span><span class="p">)</span>
+<span class="c1"># Path to experimental proximity values</span>
+<span class="n">proximity_path</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">raw_path</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">{subj}</span><span class="s1">/regs_fancy/</span><span class="si">{subj}</span><span class="s1">_all_regs.txt&#39;</span><span class="p">)</span>
+
+<span class="c1"># Define path to the shock beta map of every subject</span>
+<span class="n">func_path</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">raw_path</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">{subj}</span><span class="s1">/</span><span class="si">{subj}</span><span class="s1">_EP_TR_MNI_2mm_SI_denoised_NoBaseline.nii.gz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_TS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">main_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">yoked</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">run_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)[</span><span class="n">row</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;run0&#39;</span><span class="p">:</span><span class="s1">&#39;run5&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)]</span>
+    <span class="n">nruns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">run_list</span><span class="p">)</span>
+    <span class="n">subj</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;uncontrol&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">subj</span><span class="p">)</span>
+    
+    <span class="c1"># loading whole-brain timeseries data</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">nil</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">func_path</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subj</span><span class="o">=</span><span class="n">subj</span><span class="p">))</span>
+    <span class="c1"># Extract time-series only from right ventral-anterior insula </span>
+    <span class="n">rvAI_ts</span> <span class="o">=</span> <span class="n">apply_mask</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">rvAI</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">func</span>
+
+    <span class="c1"># Split timeseries into runs and z-scoring with subject, run, amd voxel</span>
+    <span class="n">runs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rvAI_ts</span><span class="p">,</span><span class="n">nruns</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)]</span>
+
+    <span class="n">mean_TS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">runs</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Reading the proximity regressor and splitting it into runs</span>
+    <span class="n">prox</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">proximity_path</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subj</span><span class="o">=</span><span class="n">subj</span><span class="p">),</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">nruns</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># Reading the approach and retreat onset-duration files</span>
+    <span class="n">approach_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">appr_file_path</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subj</span><span class="o">=</span><span class="n">subj</span><span class="p">),</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">retreat_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">retr_file_path</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subj</span><span class="o">=</span><span class="n">subj</span><span class="p">),</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">runs</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;run: &#39;</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Get approach onsets and corresponding durations</span>
+        <span class="n">appr_onset</span><span class="p">,</span> <span class="n">appr_dur</span> <span class="o">=</span> <span class="n">getSelectedStims</span><span class="p">(</span><span class="n">approach_file</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+        <span class="c1"># Compute approach offsets</span>
+        <span class="n">appr_offset</span> <span class="o">=</span> <span class="n">appr_onset</span> <span class="o">+</span> <span class="n">appr_dur</span>
+
+        <span class="c1"># Get indices for approach onsets and offsets</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">appr_onset_idx</span> <span class="o">=</span> <span class="n">return_closest_TR</span><span class="p">(</span><span class="n">appr_onset</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">appr_offset_idx</span> <span class="o">=</span> <span class="n">return_closest_TR</span><span class="p">(</span><span class="n">appr_offset</span><span class="p">)</span>
+
+        <span class="c1"># Get retreat onsets and corresponding durations</span>
+        <span class="n">retr_onset</span><span class="p">,</span> <span class="n">retr_dur</span> <span class="o">=</span> <span class="n">getSelectedStims</span><span class="p">(</span><span class="n">retreat_file</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+        <span class="c1"># Compute retreat offset</span>
+        <span class="n">retr_offset</span> <span class="o">=</span> <span class="n">retr_onset</span> <span class="o">+</span> <span class="n">retr_dur</span>
+
+        <span class="c1"># Get indices for retreat onsets and offsets</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">retr_onset_idx</span> <span class="o">=</span> <span class="n">return_closest_TR</span><span class="p">(</span><span class="n">retr_onset</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">retr_offset_idx</span> <span class="o">=</span> <span class="n">return_closest_TR</span><span class="p">(</span><span class="n">retr_offset</span><span class="p">)</span>
+
+        <span class="c1"># Extract the approach and retreat segments</span>
+        <span class="n">appr</span> <span class="o">=</span> <span class="p">[</span><span class="n">rvAI_ts</span><span class="p">[</span><span class="n">onset</span><span class="o">+</span><span class="mi">3</span><span class="p">:</span><span class="n">offset</span><span class="o">+</span><span class="mi">3</span><span class="p">,:]</span> <span class="k">for</span> <span class="n">onset</span><span class="p">,</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">appr_onset_idx</span><span class="p">,</span><span class="n">appr_offset_idx</span><span class="p">)]</span>
+        <span class="n">retr</span> <span class="o">=</span> <span class="p">[</span><span class="n">rvAI_ts</span><span class="p">[</span><span class="n">onset</span><span class="o">+</span><span class="mi">3</span><span class="p">:</span><span class="n">offset</span><span class="o">+</span><span class="mi">3</span><span class="p">,:]</span> <span class="k">for</span> <span class="n">onset</span><span class="p">,</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">retr_onset_idx</span><span class="p">,</span><span class="n">retr_offset_idx</span><span class="p">)]</span>
+        
+        <span class="c1"># Ensure that approach and retreat sequences are not the same</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">appr</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">retr</span><span class="p">))</span>
+
+        <span class="n">tmp_df_appr</span> <span class="o">=</span> <span class="n">tmp_df</span><span class="p">(</span><span class="n">subj</span><span class="p">,</span><span class="n">appr</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span>
+        <span class="n">tmp_df_retr</span> <span class="o">=</span> <span class="n">tmp_df</span><span class="p">(</span><span class="n">subj</span><span class="p">,</span><span class="n">retr</span><span class="p">,</span><span class="mf">0.</span><span class="p">)</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">tmp_df_appr</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;feat&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
+        
+        <span class="c1"># Ensure that approach and retreat sequence dataframes are not the same</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_raises</span><span class="p">(</span><span class="ne">AssertionError</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_frame_equal</span><span class="p">,</span><span class="n">tmp_df_appr</span><span class="p">[</span><span class="n">features</span><span class="p">],</span><span class="n">tmp_df_retr</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+
+        <span class="n">main_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">main_df</span><span class="p">,</span><span class="n">tmp_df_appr</span><span class="p">,</span><span class="n">tmp_df_retr</span><span class="p">],</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../data/processed/04a-rvAI_ALL_appr_retr_normWithinSeg.pkl&#39;</span><span class="p">,</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">main_df</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CON031
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+CON021
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON022
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON030
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON023
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON025
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON016
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON053
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON052
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON089
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON020
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON033
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON019
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON084
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON027
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON049
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON028
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON026
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON054
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON034
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON036
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON058
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON056
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON075
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON072
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON055
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON061
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON057
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON067
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON064
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON068
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON059
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON051
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON078
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON077
+run:  1
+run:  2
+run:  3
+run:  4
+CON066
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+CON098
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON076
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON073
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON085
+run:  1
+run:  2
+run:  3
+run:  4
+CON091
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON090
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON082
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON121
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON097
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON101
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON092
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON103
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON102
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON099
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON096
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON106
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON110
+run:  1
+run:  2
+run:  3
+run:  4
+CON119
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON118
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON116
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON114
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON113
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON123
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON120
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+CON125
+run:  1
+run:  2
+run:  3
+run:  4
+run:  5
+run:  6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>timepoint</th>
+      <th>feat_0</th>
+      <th>feat_1</th>
+      <th>feat_2</th>
+      <th>feat_3</th>
+      <th>feat_4</th>
+      <th>feat_5</th>
+      <th>feat_6</th>
+      <th>feat_7</th>
+      <th>...</th>
+      <th>feat_736</th>
+      <th>feat_737</th>
+      <th>feat_738</th>
+      <th>feat_739</th>
+      <th>feat_740</th>
+      <th>feat_741</th>
+      <th>feat_742</th>
+      <th>feat_743</th>
+      <th>feat_744</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CON031</td>
+      <td>0</td>
+      <td>0.528931</td>
+      <td>0.487457</td>
+      <td>0.232246</td>
+      <td>0.148743</td>
+      <td>0.042282</td>
+      <td>-0.305954</td>
+      <td>0.569565</td>
+      <td>0.028038</td>
+      <td>...</td>
+      <td>-0.865524</td>
+      <td>-0.758942</td>
+      <td>0.071503</td>
+      <td>1.118309</td>
+      <td>0.560417</td>
+      <td>-0.223091</td>
+      <td>0.608696</td>
+      <td>0.765785</td>
+      <td>-0.022957</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CON031</td>
+      <td>1</td>
+      <td>-0.277634</td>
+      <td>0.348404</td>
+      <td>0.026642</td>
+      <td>-0.086540</td>
+      <td>0.005081</td>
+      <td>0.122566</td>
+      <td>1.775352</td>
+      <td>-0.345436</td>
+      <td>...</td>
+      <td>-0.067467</td>
+      <td>-0.640572</td>
+      <td>-0.660301</td>
+      <td>0.037865</td>
+      <td>0.219612</td>
+      <td>-0.212631</td>
+      <td>-0.141502</td>
+      <td>-1.459686</td>
+      <td>-0.079445</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CON031</td>
+      <td>2</td>
+      <td>-0.340950</td>
+      <td>-0.046494</td>
+      <td>-0.843697</td>
+      <td>0.386253</td>
+      <td>-0.055161</td>
+      <td>0.201759</td>
+      <td>0.193954</td>
+      <td>-0.822807</td>
+      <td>...</td>
+      <td>-1.271828</td>
+      <td>-0.418358</td>
+      <td>0.326378</td>
+      <td>0.542999</td>
+      <td>0.977371</td>
+      <td>1.462898</td>
+      <td>1.349091</td>
+      <td>0.401657</td>
+      <td>-0.616539</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CON031</td>
+      <td>3</td>
+      <td>-0.957230</td>
+      <td>-0.483696</td>
+      <td>-0.631943</td>
+      <td>-0.733025</td>
+      <td>-1.054535</td>
+      <td>-1.221367</td>
+      <td>0.300766</td>
+      <td>-0.171844</td>
+      <td>...</td>
+      <td>0.446693</td>
+      <td>0.161339</td>
+      <td>0.489334</td>
+      <td>1.113060</td>
+      <td>2.073517</td>
+      <td>1.702499</td>
+      <td>1.946037</td>
+      <td>-0.957397</td>
+      <td>1.076385</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CON031</td>
+      <td>4</td>
+      <td>0.653816</td>
+      <td>0.495163</td>
+      <td>-0.062981</td>
+      <td>0.620285</td>
+      <td>0.885437</td>
+      <td>0.156929</td>
+      <td>0.711739</td>
+      <td>0.269211</td>
+      <td>...</td>
+      <td>-0.830025</td>
+      <td>-0.618279</td>
+      <td>-0.234123</td>
+      <td>0.233643</td>
+      <td>0.618210</td>
+      <td>0.235153</td>
+      <td>0.525703</td>
+      <td>0.515823</td>
+      <td>0.627953</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>82999</th>
+      <td>CON125</td>
+      <td>1</td>
+      <td>-0.283623</td>
+      <td>-1.042488</td>
+      <td>-1.073769</td>
+      <td>0.454636</td>
+      <td>-0.201149</td>
+      <td>-0.231270</td>
+      <td>-0.983795</td>
+      <td>-1.283463</td>
+      <td>...</td>
+      <td>-1.001152</td>
+      <td>-1.333221</td>
+      <td>-1.543907</td>
+      <td>-1.423576</td>
+      <td>-0.959427</td>
+      <td>-0.876343</td>
+      <td>-1.070953</td>
+      <td>-1.029900</td>
+      <td>-0.504875</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>83000</th>
+      <td>CON125</td>
+      <td>2</td>
+      <td>0.260696</td>
+      <td>0.421593</td>
+      <td>0.127640</td>
+      <td>0.571007</td>
+      <td>0.909370</td>
+      <td>0.319832</td>
+      <td>-0.064583</td>
+      <td>1.000420</td>
+      <td>...</td>
+      <td>0.327415</td>
+      <td>0.189087</td>
+      <td>-0.191605</td>
+      <td>-0.078743</td>
+      <td>-0.718369</td>
+      <td>-1.648987</td>
+      <td>-2.553787</td>
+      <td>0.335281</td>
+      <td>1.078712</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>83001</th>
+      <td>CON125</td>
+      <td>3</td>
+      <td>-0.413254</td>
+      <td>0.430389</td>
+      <td>-0.427307</td>
+      <td>-0.022545</td>
+      <td>-0.254982</td>
+      <td>-0.501038</td>
+      <td>0.454582</td>
+      <td>-0.002769</td>
+      <td>...</td>
+      <td>0.499496</td>
+      <td>0.793518</td>
+      <td>1.022598</td>
+      <td>1.292664</td>
+      <td>0.528244</td>
+      <td>0.425087</td>
+      <td>0.463249</td>
+      <td>0.378227</td>
+      <td>0.392067</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>83002</th>
+      <td>CON125</td>
+      <td>4</td>
+      <td>1.657669</td>
+      <td>0.679832</td>
+      <td>1.421249</td>
+      <td>0.971809</td>
+      <td>1.133339</td>
+      <td>0.768166</td>
+      <td>-0.266853</td>
+      <td>1.040421</td>
+      <td>...</td>
+      <td>-0.882324</td>
+      <td>-0.767784</td>
+      <td>-0.819664</td>
+      <td>-0.628090</td>
+      <td>-1.238991</td>
+      <td>-1.311623</td>
+      <td>-0.403946</td>
+      <td>-0.219124</td>
+      <td>-0.495201</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>83003</th>
+      <td>CON125</td>
+      <td>5</td>
+      <td>0.704773</td>
+      <td>-0.291885</td>
+      <td>0.319641</td>
+      <td>1.124100</td>
+      <td>0.849670</td>
+      <td>0.766060</td>
+      <td>-0.218445</td>
+      <td>0.434639</td>
+      <td>...</td>
+      <td>0.540215</td>
+      <td>1.145546</td>
+      <td>0.569527</td>
+      <td>0.373596</td>
+      <td>-0.061417</td>
+      <td>0.120079</td>
+      <td>0.568695</td>
+      <td>0.106758</td>
+      <td>-0.421814</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>83004 rows × 748 columns</p>
+</div></div></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/03-rAI"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Chirag Limbachia<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

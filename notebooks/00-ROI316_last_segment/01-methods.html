@@ -230,13 +230,13 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preprocessing">
-   2.2. Preprocessing
+  <a class="reference internal nav-link" href="#data-preprocessing">
+   2.2. Data Preprocessing
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-data">
-   2.3. Training Data
+  <a class="reference internal nav-link" href="#feature-selection">
+   2.3. Feature Selection
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -264,10 +264,10 @@
 <li><p>Forty-five minutes of fMRI data was collected on every participant.</p></li>
 <li><p>Two circles moved around randomly on the projection screen.</p></li>
 <li><p>When circles collided, a mild but unpleasant electric shock was delivered to the index and middle fingers of participant’s left hand.</p></li>
-<li><p>Shock delivery was only meant to induce fear of circle collision.</p></li>
+<li><p>Shock delivery was meant to induce fear of circle collision.</p></li>
 <li><p>Several “near-miss” events occured at random times during the experiment.</p></li>
-<li><p>Near-miss events are defined as those when the circles approach each other at least for 8 seconds, come very close (i.e., distance less than 1.5 times the circle diameter), but miss and start to retreat, again, at least for 8 seconds.</p></li>
-<li><p>Near-miss events were included to investigate brain’s dynamic response to approaching and retreating threats.</p></li>
+<li><p>Near-miss events are defined as those when the circles approach each other at least for 8 seconds, come very close (i.e., distance less than 1.5 times the circle diameter), but miss and start to retreat at least for 8 seconds.</p></li>
+<li><p>Near-miss events were included to investigate the brain’s dynamic response to approaching and retreating threats.</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -282,10 +282,10 @@
 </div></div>
 </div>
 </div>
-<div class="section" id="preprocessing">
-<h2><span class="section-number">2.2. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-preprocessing">
+<h2><span class="section-number">2.2. </span>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>fMRI timeseries data suffers from a lot of noise such as,</p>
+<li><p>fMRI time-series data suffers from a lot of noise such as,</p>
 <ul>
 <li><p>Physiological signals associated with respiratory and cardiac cycles.</p></li>
 <li><p>Head motion.</p></li>
@@ -295,15 +295,49 @@
 <li><p>These noise were filtered out using ICA (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/).</p></li>
 </ul>
 </div>
-<div class="section" id="training-data">
-<h2><span class="section-number">2.3. </span>Training Data<a class="headerlink" href="#training-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="feature-selection">
+<h2><span class="section-number">2.3. </span>Feature Selection<a class="headerlink" href="#feature-selection" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Out of the 45 minute long timeseries data, “segments” corresponding to near-miss events were extracted.</p></li>
-<li><p>Each segment was 14 timepoints long (14 x 1.25 = 17.5 seconds): first 7 timepoints corresponded to <strong>approach</strong>, and later 7 to <strong>retreat</strong>.</p></li>
-<li><p>Every participant had 46 segments. That is, approximately 13 out 45 minutes of data was used to train and test the predictive model.</p></li>
-<li><p>Following is an example of a segment from the parietal cortex of the brain.</p></li>
+<li><p>Time-series sequences corresponding to near-miss events were used in this project.</p></li>
+<li><p>Each sequence was 14 timepoints long (14 x 1.25 = 17.5 seconds): first 7 timepoints corresponded to <strong>approach</strong>, and later 7 to <strong>retreat</strong>.</p></li>
+<li><p>Every participant had 46 near-miss sequences.</p></li>
+<li><p>Following is an example of a sequence from the parietal cortex of the brain.</p></li>
 </ul>
-<div class="cell tag_remove-input docutils container">
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Load the data</span>
+<span class="n">DATPAT</span> <span class="o">=</span> <span class="s2">&quot;../../data/processed/00a-ROI316_withShiftedSegments.pkl&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DATPAT</span><span class="p">,</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">SEGMENTS</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    
+<span class="n">roi_idx</span> <span class="o">=</span> <span class="mi">108</span>
+<span class="n">dataset</span><span class="o">=</span><span class="n">selective_segments</span><span class="p">(</span><span class="n">SEGMENTS</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;CON054&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:,</span><span class="n">roi_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">14</span><span class="p">),</span><span class="n">roi</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Approach&#39;</span><span class="p">,</span><span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Retreat&#39;</span><span class="p">,</span><span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">})</span>
+<span class="c1">#_=plt.xticks(np.arange(14)*1.25, labels=[&#39;TR{:02d}&#39;.format(tr) for tr in np.arange(14)],rotation=90)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">14</span><span class="p">))</span>
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time Points (TP)&#39;</span><span class="p">)</span>
+
+<span class="n">mask</span> <span class="o">=</span> <span class="n">nil</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="s2">&quot;../../data/processed/masks/00b-Schaefer2018_300Parcels_17Networks_order_afniMNI152_2mm_GM.nii.gz&quot;</span><span class="p">)</span>
+<span class="n">roi_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">())</span>
+<span class="n">roi_mask</span><span class="p">[</span><span class="n">mask</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span> <span class="o">==</span> <span class="n">roi_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">roi_mask</span> <span class="o">=</span> <span class="n">nil</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">new_img_like</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">roi_mask</span><span class="p">)</span>
+<span class="c1">#plotting.view_img(roi_mask,symmetric_cmap=False,vmax=1)</span>
+<span class="n">plot_glass_brain</span><span class="p">(</span><span class="n">roi_mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoProjector at 0x7f1fbf8e7390&gt;
 </pre></div>
@@ -313,10 +347,15 @@
 </div>
 </div>
 <ul class="simple">
-<li><p>Training segments from a total of 316 brain regions were extracted in a similar fashion.</p></li>
+<li><p>Near-miss sequences from a total of 316 brain regions were extracted in a similar fashion.</p></li>
 <li><p>Following figure shows all the 316 brain regions of interest (ROI).</p></li>
 </ul>
-<div class="cell tag_remove-input docutils container">
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">plot_glass_brain</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;prism&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoProjector at 0x7f1fbdfd5780&gt;
 </pre></div>
@@ -325,7 +364,7 @@
 </div>
 </div>
 <ul>
-<li><p>Every segment was divided into two training examples and labeled accordingly as follows:</p>
+<li><p>Each sequence was divided into two training examples and labeled accordingly as follows:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                       &lt;----------- Timeseries ---------------&gt;       Label  
   training example 1: [TP00, TP01, TP02, TP03, TP04, TP05, TP06] -&gt; &quot;approach&quot;  
   training example 2: [TP07, TP08, TP09, TP10, TP11, TP12, TP13] -&gt; &quot;retreat&quot; 
@@ -339,7 +378,7 @@
 <h2><span class="section-number">2.4. </span>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
 <a class="reference internal image-reference" href="../../_images/model.png"><img alt="fMRI data" src="../../_images/model.png" style="height: 150px;" /></a>
 <p>A variant of Long-Short Term Memory (LSTM), Gated Recurrent Units (GRU) architecture was employed to characterize the spatio-temporal pattern in the fMRI data.</p>
-<p>The GRU architecture had three hidden layers, each with 16 GRU units, and an ouput time-distributed, dense layer (DL) with single sigmoid activation unit. The time-distributed DL returned prediction at every timepoint. Following was the employed model architecture:</p>
+<p>The GRU architecture had three hidden layers, each with 16 GRU units, and an ouput time-distributed, dense layer (DL) with single sigmoid activation unit. The time-distributed DL returned prediction at every time-point. Following was the employed model architecture:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
