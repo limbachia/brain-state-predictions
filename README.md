@@ -1,6 +1,6 @@
 # Decoding Brain Dynamics: Brain Activity Patterns Predict Nature of the Stimulus.
 
-Functional magnetic resonance imaging (fMRI) data, LSTM (GRU) implementation to predict brain states during anticipation of aversive and neutral events.
+LSTM (GRU) implementation on fMRI timeseries data to predict instances of approaching and retreating threats.
 
 ## Requirements
 
