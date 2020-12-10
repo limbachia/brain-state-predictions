@@ -1,7 +1,7 @@
 - file: landing-page
   numbered: true
 
-- part: Brain State Prediction
+- part: Decoding Brain Dynamics
   sections:
   - file: notebooks/00-ROI316_last_segment/00-intro
   - file: notebooks/00-ROI316_last_segment/01-methods
