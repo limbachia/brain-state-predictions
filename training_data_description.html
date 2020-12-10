@@ -91,7 +91,7 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <p class="caption">
  <span class="caption-text">
-  Brain State Prediction
+  Decoding Brain Dynamics
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -492,17 +492,17 @@ shown above was extended as follows:</p>
 <p>A Reccurent Neural Network (RNN) with Gated Recurrent Units (GRU) was used to build a predictive model. The RNN had three hidden layers, each with 16 GRU units, and a dense output layer with single unit. <code class="docutils literal notranslate"><span class="pre">binary_crossentropy</span></code> was used as the loss function which was minimized using an <code class="docutils literal notranslate"><span class="pre">Adam</span></code> optimizer. Following was the model architecture:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_146&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-gru_438 (GRU)                (None, None, 16)          16032     
+gru (GRU)                    (None, None, 16)          16032     
 _________________________________________________________________
-gru_439 (GRU)                (None, None, 16)          1632      
+gru_1 (GRU)                  (None, None, 16)          1632      
 _________________________________________________________________
-gru_440 (GRU)                (None, 16)                1632      
+gru_2 (GRU)                  (None, None, 16)          1632      
 _________________________________________________________________
-dense_146 (Dense)            (None, 1)                 17        
+time_distributed (TimeDistri (None, None, 1)           17        
 =================================================================
 Total params: 19,313
 Trainable params: 19,313
