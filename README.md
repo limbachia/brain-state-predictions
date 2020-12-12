@@ -53,9 +53,16 @@ Check out a short clip of the visual stimulus [here](https://youtu.be/RUhoOgjJql
     - Physiological signals associated with respiratory and cardiac cycles.
     - Head motion.
     - Scanner noise (drifts).
-- These noise were filtered out using ICA provided FMRIB Software Library [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/)
+- These noise were filtered out using ICA provided FMRIB Software Library ([FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/))
 
+## Feature Selection
+- Time-series sequences corresponding to near-miss events were used in this project.  
+- Each sequence was 14 timepoints long (14 x 1.25 = 17.5 seconds): first 7 timepoints corresponded to **approach**, and later 7 to **retreat**.  
+- Every participant had 46 near-miss sequences.  
+- Near-miss sequences from a total of 316 brain regions were extracted in a similar fashion.  
+- Following figure shows all the 316 brain regions of interest (ROI).  
 
+<img src="support/images/ROI316.png" alt="316 ROIs" width="600"/>
 
 
 
