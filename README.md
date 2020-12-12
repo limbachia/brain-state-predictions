@@ -34,6 +34,19 @@ In this project, dynamic brain activity patterns of human subjects captured by f
 (https://psychology.stackexchange.com/questions/19587/what-does-fmri-data-look-like-after-pre-processing)
 
 
+# Methods
+
+## Procedure & Visual Stimuli
+- fMRI data was collected from 61 participants.
+- Forty-five minutes of fMRI data was collected on every participant.
+- Two circles moved around randomly on the projection screen. 
+- When circles collided, a mild but unpleasant electric shock was delivered to the index and middle fingers of participant's left hand. 
+- Shock delivery was meant to induce fear of circle collision.
+- Several "near-miss" events occured at random times during the experiment. 
+- Near-miss events are defined as those when the circles approach each other at least for 8 seconds, come very close (i.e., distance less than 1.5 times the circle diameter), but miss and start to retreat at least for 8 seconds.
+- Near-miss events were included to investigate the brain's dynamic response to approaching and retreating threats.
+
+Check out a short clip of the visual stimulus [here](https://youtu.be/RUhoOgjJqlo)
 
 ## Tuning, Training & Evaluation
 To find best hyperparameters like `L2`, `dropout`, and `learning_rate` for the GRU classifier
