@@ -30,7 +30,7 @@ In this project, dynamic brain activity patterns of human subjects captured by f
 - Rate at which fMRI data is collected is commonly referred to as repetition time (TR).
 - Commonly employed TR is 0.5-2 seconds per volume. TR = 1.25 seconds for the current study.
 
-<img src="../../support/images/fmridata.png" alt="fMRI data" width="600"/>
+<img src="support/images/fmridata.png" alt="fMRI data" width="600"/>
 (https://psychology.stackexchange.com/questions/19587/what-does-fmri-data-look-like-after-pre-processing)
 
 
