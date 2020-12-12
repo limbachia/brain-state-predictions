@@ -48,6 +48,18 @@ In this project, dynamic brain activity patterns of human subjects captured by f
 
 Check out a short clip of the visual stimulus [here](https://youtu.be/RUhoOgjJqlo)
 
+## Data Preprocessing
+- fMRI time-series data suffers from a lot of noise such as,
+    - Physiological signals associated with respiratory and cardiac cycles.
+    - Head motion.
+    - Scanner noise (drifts).
+- These noise were filtered out using ICA provided FMRIB Software Library [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/)
+
+
+
+
+
+
 ## Tuning, Training & Evaluation
 To find best hyperparameters like `L2`, `dropout`, and `learning_rate` for the GRU classifier
 using a cross-validation, gri-search approach:
