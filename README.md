@@ -62,9 +62,23 @@ Check out a short clip of the visual stimulus [here](https://youtu.be/RUhoOgjJql
 - Near-miss sequences from a total of 316 brain regions were extracted in a similar fashion.  
 - Following figure shows all the 316 brain regions of interest (ROI).  
 
-<img src="support/images/ROI316.png" alt="316 ROIs" width="600"/>
+<img src="support/images/ROI316.png" alt="316 ROIs" width="400"/>
 
+- Each sequence was divided into two training examples and labeled accordingly as follows:
 
+                             <----------- Timeseries --------------->       Label  
+        training example 1: [TP00, TP01, TP02, TP03, TP04, TP05, TP06] -> "approach"  
+        training example 2: [TP07, TP08, TP09, TP10, TP11, TP12, TP13] -> "retreat" 
+        
+- Out of 61 participants, only 42 participants' data was used to train and validate the model. Remaining 19 participants data was used to test the model.
+
+## Model
+
+<img src="support/images/model.png" alt="fMRI data" height="150"/>
+
+A variant of Long-Short Term Memory (LSTM), Gated Recurrent Units (GRU) architecture was employed to characterize the spatio-temporal pattern in the fMRI data. 
+
+The GRU architecture had three hidden layers, each with 16 GRU units, and an ouput time-distributed, dense layer (DL) with single sigmoid activation unit. The time-distributed DL returned prediction at every time-point. Following was the employed model architecture:
 
 
 ## Tuning, Training & Evaluation
