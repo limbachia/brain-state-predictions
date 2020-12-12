@@ -13,6 +13,28 @@ pip install -r requirements.txt
 
 Data: Proprietary
 
+
+# Introduction
+
+Different stimuli evoke different brain response, which enables an organism to respond to a particular stimulus in a particular way. Interesting question about the brain-stimuli relationship is: can the nature of the stimulus be predicted based on the evoked brain activity?
+
+In this project, dynamic brain activity patterns of human subjects captured by fMRI in response to approaching and retreating threats is used to predict the stimulus class (approaching or retreating threat).  
+
+## What is fMRI data?
+
+- Functional Magnetic Resonance Imaging (fMRI) is a timeseries data.
+- Like a movie of the brain.
+- Each frame is a 3D volume that represents a timepoint.
+- Unit of the 3D volume is a voxel (analogous to 2D image pixel).  
+- Dimensions of a voxel is generally 3mm x 3mm x 3mm.
+- Rate at which fMRI data is collected is commonly referred to as repetition time (TR).
+- Commonly employed TR is 0.5-2 seconds per volume. TR = 1.25 seconds for the current study.
+
+<img src="../../support/images/fmridata.png" alt="fMRI data" width="600"/>
+(https://psychology.stackexchange.com/questions/19587/what-does-fmri-data-look-like-after-pre-processing)
+
+
+
 ## Tuning, Training & Evaluation
 To find best hyperparameters like `L2`, `dropout`, and `learning_rate` for the GRU classifier
 using a cross-validation, gri-search approach:
