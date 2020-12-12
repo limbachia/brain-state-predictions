@@ -81,7 +81,7 @@ A variant of Long-Short Term Memory (LSTM), Gated Recurrent Units (GRU) architec
 The GRU architecture had three hidden layers, each with 16 GRU units, and an ouput time-distributed, dense layer (DL) with single sigmoid activation unit. The time-distributed DL returned prediction at every time-point. Following was the employed model architecture:
 
 
-## Tuning, Training & Evaluation
+## Training, Tuning & Evaluation
 To find best hyperparameters like `L2`, `dropout`, and `learning_rate` for the GRU classifier
 using a cross-validation, gri-search approach:
 
@@ -95,15 +95,18 @@ python grid_search.py --input-data <path to segments dataset pickle file> \
 
 The `grid_search.py` script can be used to find the best combination of `L2`, `dropout`, and `learning_rate` by specifying a range of values for each hyperparameter (as in the above example). It can also be used to simply get a k-fold cross-validation performance for a single combination of hyperparameters. This can be done by specifying single values for every hyperparameter and skipping the `--n-models` option.
 
+The training and validation performance for all combinations of hyperparameters can be found in (notebooks/00-ROI316_last_segment/02-results.ipynb)[https://github.com/limbachia/brain-state-predictions/blob/master/notebooks/00-ROI316_last_segment/02-results.ipynb].
+
 ---
 
-To train a model using the best hyperparameters and save it:
+To train a model using the best hyperparameters found in the previous step:
 ```
 python train_model.py -GSCV <path to the output of grid_search.py> \
     -data <path to segments dataset pickle file> \
     -tp 5 -overwrite <overwrite previous output: 0 (default) or 1> \
     -o <declare path and model name (end with extension '.h5')>
 ```
+The `train_model.py` script trains the model on the entire training dataset with best hyperparameters, and saves the trained model for later use. Performance of the trained model on the test dataset can be found in (notebooks/00-ROI316_last_segment/02-results.ipynb)[https://github.com/limbachia/brain-state-predictions/blob/master/notebooks/00-ROI316_last_segment/02-results.ipynb].
 
 ---
 To get chance chance accuracy distribution:
@@ -114,5 +117,7 @@ python perm_accuracy.py -data <path to segments dataset pickle file> \
     -overwrite <overwrite previous output: 0 (default) or 1> \
     --output <declare path and output file name (end with extension '.pkl')>
 ```
+The `perm_accuracy.py` simulates a chance accuracy distribution. It trains the model with best hyperparameters on the training dataset `k_perms` times, each time with shuffled labels. At every iteration, the model is tested on the test dataset with non-shuffled (i.e., true) labels, and the accuracy is recorded. This results in a chance accuracy distribution. Chance accuracy is the accuracy found if the model was to predict one of the two classes at random. Significance the observed accuracy vs. the chance accuracy can be found in (notebooks/00-ROI316_last_segment/02-results.ipynb)[https://github.com/limbachia/brain-state-predictions/blob/master/notebooks/00-ROI316_last_segment/02-results.ipynb].
+
 
 
