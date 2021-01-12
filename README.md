@@ -122,4 +122,6 @@ python perm_accuracy.py -data <path to segments dataset pickle file> \
 The `perm_accuracy.py` simulates a chance accuracy distribution. It trains the model with best hyperparameters on the training dataset `k_perms` times, each time with shuffled labels. At every iteration, the model is tested on the test dataset with non-shuffled (i.e., true) labels, and the accuracy is recorded. This results in a chance accuracy distribution. Chance accuracy is the accuracy found if the model was to predict one of the two classes at random. Significance the observed accuracy vs. the chance accuracy can be found in (notebooks/00-ROI316_last_segment/02-results.ipynb)[https://github.com/limbachia/brain-state-predictions/blob/master/notebooks/00-ROI316_last_segment/02-results.ipynb].
 
 
+[Please checkout the results in this interactive notebook](https://limbachia.github.io/brain-state-predictions/landing-page.html)
+
 
